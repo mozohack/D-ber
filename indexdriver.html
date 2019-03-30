@@ -7,8 +7,32 @@
 		<meta charset="utf-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.0.3/dist/leaflet.css"/>
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.0.3/dist/leaflet.js"></script>
+    
+          <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    
   </head>
   <body>
+    
+<div style="position: absolute; bottom: 10px; width:100%; text-align: center; z-index: 99999999999999999;">
+  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">ADD USER</a>
+</div>
+    
+    
+
+<div id="modal1" class="modal">
+    <div class="modal-content">
+      <p>add user id</p>
+      <input placeholder="add" id="userdata" type="text">
+    </div>
+    <div class="modal-footer">
+      <a href="#!" id="getdata" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
+    
+    
     <div id="map"></div>
     <a id="share" class="hide"><div class="stick button">Share</div></a>
     <div id="link" class="hide">
@@ -73,7 +97,6 @@
     <script src="https://gunjs.herokuapp.com/gun.js"></script>
     <script>
 
-
       function Where(opt, cb){
         // a small wrapper around Leaflet for map tracking.
         var where = {};
@@ -82,6 +105,7 @@
         where.opt.err = where.opt.err || function(){};
 
         where.map = L.map('map', { zoom: where.opt.zoom.level });
+        var map = where.map;
 
         where.opt.tile = where.opt.tile || L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
           maxZoom: where.opt.zoom.max,
@@ -110,18 +134,14 @@
           
 	var LeafIcon = L.Icon.extend({
 		options: {
-			shadowUrl: 'https://cdn.glitch.com/3fde6c11-e965-411e-ae43-487ed3ca52c6%2Fleaf-shadow.png?1553971164406',
-			iconSize:     [38, 95],
-			shadowSize:   [50, 64],
-			iconAnchor:   [22, 94],
-			shadowAnchor: [4, 62],
-			popupAnchor:  [-3, -76]
+			iconSize:     [95, 95],
+			iconAnchor:   [22, 22]
 		}
 	});
       
- var greenIcon = new LeafIcon({iconUrl: 'https://cdn.glitch.com/3fde6c11-e965-411e-ae43-487ed3ca52c6%2Fleaf-green.png?1553971022866'});
+ var greenIcon = new LeafIcon({iconUrl: 'https://images.vexels.com/media/users/3/144839/isolated/preview/c053fda836de068b36cc18db64aec46d-black-car-illustration-by-vexels.png'});
           
-          where.marker = where.marker || L.marker([51.5, -0.09], {icon: greenIcon}).setLatLng(latlng).addTo(where.map);
+          where.marker = where.marker || L.marker([0, 0], {icon: greenIcon}).setLatLng(latlng).addTo(where.map);
           where.marker.setLatLng(latlng).update();
           where.update.last = (+new Date);
         }
@@ -182,7 +202,7 @@
               //$('#debug').value = JSON.stringify(gps.last);
             }
             gps.where = gps.where || Where(gps.opt);
-            $('#follow').text(("https://dber.glitch.me/user/" || (location.origin + location.pathname)) + '#' + gps.track);
+            $('#follow').text(("https://dber.glitch.me/driver/" || (location.origin + location.pathname)) + '#' + gps.track);
             $('#share').removeClass("hide");
             $('#share').on('click', function(){
               $('#link').toggleClass("hide");
@@ -195,6 +215,11 @@
         start();
         window.onhashchange = start;
       }());
+    
     </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+   <script>
+        M.AutoInit();
+    </script> 
   </body>
 </html>

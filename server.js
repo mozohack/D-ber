@@ -12,8 +12,16 @@ const app = express();
 app.use(express.static('public'));
 
 // http://expressjs.com/en/starter/basic-routing.html
+
 app.get('/', function(request, response) {
+  response.sendFile(__dirname + '/indexdriver.html');
+});
+
+app.get('/user', function(request, response) {
   response.sendFile(__dirname + '/index.html');
+});
+app.get('/driver', function(request, response) {
+  response.sendFile(__dirname + '/indexdriver.html');
 });
 
 // listen for requests :)
